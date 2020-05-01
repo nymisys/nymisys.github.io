@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Spike: The Language</title>
+<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body style="margin-left: 1in; margin-right: 1in;">
+
+<p><a href="http://sourceforge.net/projects/spike/"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=197353&amp;type=11" width="120" height="30" alt="Get Spike at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a></p>
+
+<h1 style="text-align: center"><img src="images/spikelanguage.gif" align=center>Spike: The Language</h1>
+
+<div style="float: right; margin-left: 1in; margin-bottom: 1in; padding: .2in; border: thin solid red;">
+
+<h3>"Hello, world" in Spike</h3>
+
+<div class="highlight"><pre><span class="cp">#!/usr/bin/env spike-1</span>
+
+<span class="n">main</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">stdout</span><span class="p">.</span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;Yip!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+
+<p>Spike is a brand-new programming language.  It was born out of
+frustration with Python, and a love of Smalltalk.  In essence, Spike
+is Smalltalk with a C-like syntax.</p>
+
+<h2>Download</h2>
+
+<p>Spike is still a puppy.  He's still in alpha.  You may download an
+alpha release <a href="http://sourceforge.net/projects/spike/">here</a>.</p>
+
+<p>There is no documentation except for this page.  There is no linker;
+but you won't miss it, because there are no libraries (not even a
+standard library).  I'll stop here, because the number of things that
+are missing are too numerous to mention.</p>
+
+<h2>Installation</h2>
+
+<blockquote>
+<pre>
+make
+# add 'spike-1' to your PATH
+./examples/hello.spk
+</pre>
+</blockquote>
+
+
+<h2>Examples</h2>
+
+<h3>Fibonacci</h3>
+
+<div class="highlight"><pre><span class="cp">#!/usr/bin/env spike-1</span>
+
+<span class="n">fib</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="mi">2</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">fib</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">main</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">stdout</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">fib</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h3>A simple class</h3>
+
+<div class="highlight"><pre><span class="cp">#!/usr/bin/env spike-1</span>
+
+<span class="k">class</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
+    
+    <span class="c1">// initializing</span>
+    <span class="n">init</span><span class="p">(</span><span class="n">newX</span><span class="p">,</span> <span class="n">newY</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">newX</span><span class="p">;</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">newY</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// accessing</span>
+    <span class="n">x</span> <span class="p">{</span> <span class="k">return</span> <span class="n">x</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">y</span> <span class="p">{</span> <span class="k">return</span> <span class="n">y</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">newX</span> <span class="p">{</span> <span class="n">x</span> <span class="o">=</span> <span class="n">newX</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">newY</span> <span class="p">{</span> <span class="n">y</span> <span class="o">=</span> <span class="n">newY</span><span class="p">;</span> <span class="p">}</span>
+    
+    <span class="n">self</span> <span class="nl">x:</span> <span class="n">newX</span> <span class="nl">y:</span> <span class="n">newY</span> <span class="p">{</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">newX</span><span class="p">;</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">newY</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">;</span>
+    <span class="p">}</span>
+        
+    <span class="c1">// arithmetic</span>
+    <span class="n">self</span> <span class="o">+</span> <span class="n">delta</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="k">class</span>
+            <span class="nc">x</span><span class="o">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">delta</span><span class="p">.</span><span class="n">x</span>
+            <span class="nl">y:</span> <span class="n">y</span> <span class="o">+</span> <span class="n">delta</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">self</span> <span class="o">*</span> <span class="n">scale</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="k">class</span>
+            <span class="nc">x</span><span class="o">:</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">x</span>
+            <span class="nl">y:</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">y</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="o">-</span><span class="n">self</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="k">class</span>
+            <span class="nc">x</span><span class="o">:</span> <span class="o">-</span><span class="n">x</span>
+            <span class="nl">y:</span> <span class="o">-</span><span class="n">y</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">self</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="k">class</span>
+            <span class="nc">x</span><span class="o">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="nl">y:</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">self</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="k">class</span>
+            <span class="nc">x</span><span class="o">:</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="nl">y:</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// printing</span>
+    <span class="n">print</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">stdout</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;(%d, %d)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+<span class="p">}</span> <span class="n">meta</span> <span class="p">{</span>
+    
+    <span class="n">self</span> <span class="nl">x:</span> <span class="n">xValue</span> <span class="nl">y:</span> <span class="n">yValue</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="k">new</span><span class="p">()</span> <span class="nl">x:</span> <span class="n">xValue</span> <span class="nl">y:</span> <span class="n">yValue</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="n">main</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">;</span>
+    
+    <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="nc">Point</span><span class="p">)</span> <span class="nl">x:</span> <span class="mi">4</span>  <span class="nl">y:</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="nc">Point</span><span class="p">)</span> <span class="nl">x:</span> <span class="mi">22</span> <span class="nl">y:</span> <span class="mi">44</span><span class="p">;</span>
+    
+    <span class="n">stdout</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;a is &quot;</span><span class="p">);</span> <span class="n">a</span><span class="p">.</span><span class="n">print</span><span class="p">();</span>
+    <span class="n">stdout</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;b is &quot;</span><span class="p">);</span> <span class="n">b</span><span class="p">.</span><span class="n">print</span><span class="p">();</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+    <span class="n">stdout</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;c is &quot;</span><span class="p">);</span> <span class="n">c</span><span class="p">.</span><span class="n">print</span><span class="p">();</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-7908724-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>
